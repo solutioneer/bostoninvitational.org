@@ -1,0 +1,12 @@
+name = Get Directions
+description = "Fetches Google map directions."
+core = 7.x
+php = 5
+configure = admin/config/services/getdirections
+
+; Information added by drupal.org packaging script on 2012-04-16
+version = "7.x-2.1"
+core = "7.x"
+project = "getdirections"
+datestamp = "1334570500"
+

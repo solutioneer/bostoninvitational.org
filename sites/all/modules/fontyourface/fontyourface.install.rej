@@ -1,0 +1,20 @@
+***************
+*** 262,267 ****
+  function fontyourface_update_7202() {
+  
+    $schema = fontyourface_7200_schema();
+-   db_add_unique_key('fontyourface_font', 'url', array('url'));
+  
+  } // fontyourface_update_7202
+--- 262,272 ----
+  function fontyourface_update_7202() {
+  
+    $schema = fontyourface_7200_schema();
++   try {
++     db_add_unique_key('fontyourface_font', 'url', array('url'));
++   }
++   catch (DatabaseSchemaObjectExistsException $e) {
++     // Fail silently.
++   }
+  
+  } // fontyourface_update_7202

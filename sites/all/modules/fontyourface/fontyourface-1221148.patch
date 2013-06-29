@@ -1,0 +1,30 @@
+From 7419cbcc98a17c31b6f45a620ae10afcb87e03c4 Mon Sep 17 00:00:00 2001
+From: Alex Weber <alexweber15@gmail.com>
+Date: Sun, 1 Apr 2012 23:39:21 -0300
+Subject: [PATCH] Issue #1221148 by david1409
+
+Avoid Exception when adding unique 'url' key
+---
+ fontyourface.install |    7 ++++++-
+ 1 files changed, 6 insertions(+), 1 deletions(-)
+
+diff --git a/fontyourface.install b/fontyourface.install
+index 0d8d973..9ab5f3d 100644
+--- a/fontyourface.install
++++ b/fontyourface.install
+@@ -262,6 +262,11 @@ function fontyourface_update_7201() {
+ function fontyourface_update_7202() {
+ 
+   $schema = fontyourface_7200_schema();
+-  db_add_unique_key('fontyourface_font', 'url', array('url'));
++  try {
++    db_add_unique_key('fontyourface_font', 'url', array('url'));
++  }
++  catch (DatabaseSchemaObjectExistsException $e) {
++    // Fail silently.
++  }
+ 
+ } // fontyourface_update_7202
+-- 
+1.7.5.4
+
